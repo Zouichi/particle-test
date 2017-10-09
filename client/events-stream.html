@@ -20,27 +20,29 @@
 // document.write('<li>' + socket + '</li>');
 // });
 
+var tableX = [];
+var tableY = [];
+
 var socket = io.connect('http://localhost:3000');
 socket.on("monsocket", function(socket) {
     console.log(socket);
-    console.log(JSON.parse(socket));
     var ul =  document.getElementById("liste");
     var li = document.createElement('li');
     li.innerHTML = socket;
     ul.appendChild(li);
-    //document.write('<li>' + socket + '</li>');
 
-});
+tableY.push(JSON.parse(socket).data);
+tableX.push(JSON.parse(socket).published_at);
 
 // Chart.js
     var ctx = document.getElementById("myChart").getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            labels: tableX,
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: 'Valeurs de la photoresistance',
+                data: tableY,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -69,6 +71,7 @@ socket.on("monsocket", function(socket) {
                 }]
             }
         }
+});
     });
 </script>
 

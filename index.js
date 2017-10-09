@@ -13,11 +13,11 @@ var io = require('socket.io')(server);
 var particle = new Particle();
 var token;
 
-// j'instance la connection mongo 
+// j'instancie la connexion mongo 
 var promise = mongoose.connect('mongodb://localhost:27017/ifaObj', {
     useMongoClient: true,
 });
-// quand la connection est réussie
+// quand la connexion est réussie
 promise.then(
     () => {
         console.log('db.connected');
